@@ -11,12 +11,14 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +41,7 @@ public class HotelEntity {
     private Boolean isEco;
     private String name;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "hotel_photos", joinColumns = @JoinColumn(name = "hotel_id"))
     @Column(name = "photo_url")
     private List<String> photos;
@@ -47,13 +49,16 @@ public class HotelEntity {
     private Double pricePerNight;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private HotelType type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "availability_id")
+    @NotNull
     private AvailabilityEntity availability;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
+    @NotNull
     private LocationEntity location;
 }

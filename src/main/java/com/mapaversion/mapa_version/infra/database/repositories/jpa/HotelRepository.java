@@ -7,5 +7,4 @@ import com.mapaversion.mapa_version.domain.entities.HotelEntity;
 
 @Repository
 public interface HotelRepository extends JpaRepository<HotelEntity, Long> {
-
 }

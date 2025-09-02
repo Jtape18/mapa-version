@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   postgres:
-    image: postgres:16
+    image: postgres:16.2
     container_name: mapa_verde_db
     restart: unless-stopped
     ports:
